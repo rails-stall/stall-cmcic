@@ -1,8 +1,15 @@
-require "stall/cmcic/version"
+require 'cic_payment'
 
 module Stall
-  module CMCIC
+  module Cmcic
+    extend ActiveSupport::Autoload
+
+    autoload :CicPayment
+    autoload :Version
+    autoload :Utils
+    autoload :FakeGatewayPaymentNotification
   end
 end
 
 require 'stall/cmcic/gateway'
+require 'stall/cmcic/engine'
