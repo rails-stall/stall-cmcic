@@ -1,4 +1,5 @@
 require 'cic_payment'
+require 'stall'
 
 module Stall
   module Cmcic
