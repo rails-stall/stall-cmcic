@@ -50,6 +50,19 @@ variable :
 Just like the other settings, you can change the way it's configured in the
 stall initializer file.
 
+### Automatic response URL
+
+You need to provide a payment response URL to your bank which will be :
+
+```text
+<http|http>://<YOUR_DOMAIN>/cmcic/payment/notify
+```
+
+You can find the route with :
+
+```bash
+rake routes | grep payment/notify
+```
 
 ## Contributing
 
