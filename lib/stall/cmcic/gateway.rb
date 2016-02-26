@@ -27,7 +27,7 @@ module Stall
         Response.new(request)
       end
 
-      def self.fake_transaction_for(cart)
+      def self.fake_payment_notification_for(cart)
         Stall::Cmcic::FakeGatewayPaymentNotification.new(cart)
       end
 
@@ -75,7 +75,6 @@ module Stall
         end
 
         def rendering_options
-          return_code = valid_response? ? '0' : '1'
           { text: "version=2\ncdr=#{ return_code }\n" }
         end
 
@@ -83,13 +82,12 @@ module Stall
           response[:success]
         end
 
-        def valid_response?
-          response[:success] || (response['code-retour'].downcase == 'annulation')
+        def notify
+          cart.payment.pay! if success?
         end
 
-        def process_payment_for(request)
-          @request = request
-          cart.payment.pay! if success?
+        def valid?
+          response.length > 1
         end
 
         private
@@ -106,6 +104,14 @@ module Stall
 
         def gateway
           @gateway = Stall::Cmcic::Gateway
+        end
+
+        def return_code
+          if success? || (response['code-retour'].try(:downcase) == 'annulation')
+            '0'
+          else
+            '1'
+          end
         end
       end
     end

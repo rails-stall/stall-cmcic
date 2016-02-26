@@ -24,7 +24,7 @@ module Stall
           'date' => format_date(Time.now),
           'montant' => price_with_currency(cart.total_price),
           'reference' => transaction_id,
-          'texte-libre' => "",
+          'texte-libre' => cart.reference,
           'code-retour' => "payetest",
           'cvx' => "oui",
           'vld' => "1219",
