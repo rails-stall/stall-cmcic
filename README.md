@@ -29,7 +29,26 @@ Then use the install generator to copy the config template file :
 
 ## Usage
 
-Start by filling the needed informations in the
+You first need to configure the gateway by filling the required variables in
+that were added to the stall config initialize.
+
+By default, it is configured to fetch from the variables from the environment,
+so ideally, just create the following env vars :
+
+- `CMCIC_HMAC_KEY`
+- `CMCIC_TPE`
+- `CMCIC_SOCIETE`
+
+Restart your server, and you should now be able to use the CM-CIC payment
+gateway in test mode.
+
+When you're ready to switch to production, juste set the following environment
+variable :
+
+- `CMCIC_PRODUCTION_MODE=true`
+
+Just like the other settings, you can change the way it's configured in the
+stall initializer file.
 
 
 ## Contributing
