@@ -90,20 +90,20 @@ module Stall
           response.length > 1
         end
 
-        private
-
-        def response
-          @response ||= Stall::Cmcic::CicPayment.new(gateway).response(
-            Rack::Utils.parse_nested_query(request.raw_post)
-          )
-        end
-
         def cart
           @cart ||= Cart.find_by_reference(response['texte-libre'])
         end
 
         def gateway
           @gateway = Stall::Cmcic::Gateway
+        end
+
+        private
+
+        def response
+          @response ||= Stall::Cmcic::CicPayment.new(gateway).response(
+            Rack::Utils.parse_nested_query(request.raw_post)
+          )
         end
 
         def return_code
