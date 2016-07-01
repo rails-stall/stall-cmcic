@@ -5,7 +5,7 @@ module Stall
 
       def price_with_currency(price)
         [
-          price.format(symbol: '', separator: '.'),
+          price.format(symbol: '', separator: '.', delimiter: ''),
           currency
         ].join
       end
