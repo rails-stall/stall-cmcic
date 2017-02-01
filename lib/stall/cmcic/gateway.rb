@@ -74,20 +74,20 @@ module Stall
           @request = request
         end
 
-        def rendering_options
-          { text: "version=2\ncdr=#{ return_code }\n" }
+        def valid?
+          response.length > 1
         end
 
         def success?
           response[:success]
         end
 
-        def notify
-          cart.payment.pay! if success?
+        def process
+          valid? && success?
         end
 
-        def valid?
-          response.length > 1
+        def rendering_options
+          { text: "version=2\ncdr=#{ return_code }\n" }
         end
 
         def cart
