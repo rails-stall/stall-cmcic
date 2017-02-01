@@ -91,7 +91,7 @@ module Stall
         end
 
         def cart
-          @cart ||= Cart.find_by_reference(response['texte-libre'])
+          @cart ||= ProductList.find_by_reference(response['texte-libre'])
         end
 
         def gateway
